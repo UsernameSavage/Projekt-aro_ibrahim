@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  web:
+    image: "httpd"
+    restart: 'always'
+    depends_on:
+      - mariadb
+    restart: 'always'
+    ports:
+      - '80:80'
+    links:
+      - mariadb
+  mariadb:
+    image: "mariadb"
+    restart: 'always'
+    environment:
+      MYSQL_ROOT_PASSWORD: linuxc
+      MYSQL_DATABASE: lamp
+      MYSQL_USER: luser
+      MYSQL_PASSWORD: linuxc
+
+  php:
+    image: "php"
+    restart: 'always'
